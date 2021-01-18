@@ -37,7 +37,16 @@ struct cmpColors {
 void ConvertImage( const std::string &name, const std::string &paletteName )
 {
 	string fileName = name + ".png";
-	string outputFileName = name + "_r.png";
+
+	std::size_t finalUnderScore = name.find_last_of("_");
+
+	string outputName = name.substr(0, finalUnderScore + 1) + "r_" + name.substr(finalUnderScore + 1);
+
+	string outputFileName = outputName + ".png";
+
+	string outputFailFileName = outputName + "_failed.png";
+
+	//string outputFileName = "r_" + name + ".png";
 
 	string paletteFileName = paletteName + ".png";
 
@@ -121,7 +130,7 @@ void ConvertImage( const std::string &name, const std::string &paletteName )
 			++i;
 		}
 
-		im.saveToFile(outputFileName);
+		im.saveToFile(outputFailFileName);
 
 		cout << "\nconversion failed" << endl;
 	}
@@ -162,7 +171,8 @@ void TestConvertedImage(const std::string &name, const std::string &paletteName 
 int main()
 {
 	//TestConvertedImage("testimage", "testpalette");
-	ConvertImage("blocker_w1_192x192", "blocker_palette");
+	//ConvertImage("blocker_w1_192x192", "blocker_palette");
+	ConvertImage("KinTest/run_64x64", "KinTest/kin_palette_23x4");
 
 	int xxx;
 	cin >> xxx;
