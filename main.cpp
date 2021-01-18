@@ -87,6 +87,7 @@ void ConvertImage( const std::string &name, const std::string &paletteName )
 				if(colorMap.count(tempRGB) == 0)
 				{
 					missingColorSet.insert(tempRGB);
+					im.setPixel(x, y, Color::Magenta);
 				}
 				else
 				{
@@ -119,6 +120,8 @@ void ConvertImage( const std::string &name, const std::string &paletteName )
 				<< ", b: 0x" << (int)tempColor.b << "\n";
 			++i;
 		}
+
+		im.saveToFile(outputFileName);
 
 		cout << "\nconversion failed" << endl;
 	}
